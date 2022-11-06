@@ -1,0 +1,20 @@
+{
+    "name": "Volta",
+    "id": "volta",
+    "version": "1.0.0",
+    "description": "Installs Volta, the hassle-free JavaScript tool manager",
+    "options": {
+        "version": {
+            "type": "strsing",
+            "proposals": [
+                "latest"
+            ],
+            "default": "latest",
+            "description": "Select or enter a version."
+        },
+        "otherNodeVersion": {
+            "type": "string",
+            "description": "Select or enter a version of preinstalled node."
+        }
+    }
+}
