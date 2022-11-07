@@ -6,9 +6,10 @@
 
 USERNAME=${USERNAME:-"automatic"}
 VERSION=${VERSION:-'latest'}
-OTHER_NODE_VERSION=${OTHERNODEVERSION:-'16.14.2'}
 
 set -eu
+
+source utils.sh
 
 if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
@@ -37,14 +38,11 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
-curl https://get.volta.sh | bash
+if [ "${VERSION}" = "latest" ] || version_greater_equal "${VERSION}" 1.1.0; then
+    curl https://get.volta.sh | bash -s -- --version "${VERSION}"
+else
+    curl https://raw.githubusercontent.com/volta-cli/volta/8f2074f423c65405dfba9858d9bcf393c38ffb45/dev/unix/volta-install.sh | bash -s -- --version "${VERSION}"
+fi
 
 export VOLTA_HOME="/${USERNAME}/.volta"
 export PATH=$VOLTA_HOME/bin:$PATH
-
- # /${USERNAME}/.volta/bin/volta install node
- # /${USERNAME}/.volta/bin/volta install pnpm
-
-# if [ -n "$OTHER_NODE_VERSION" ]; then
-#    /${USERNAME}/.volta/bin/volta install node@"${OTHER_NODE_VERSION}"
-# fi

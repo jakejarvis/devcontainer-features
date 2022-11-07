@@ -5,6 +5,10 @@ on:
       - main
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+  
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,7 +20,14 @@ jobs:
         ]
         baseImage:
           [
-            "mcr.microsoft.com/devcontainers/base:ubuntu"
+            "mcr.microsoft.com/devcontainers/base:ubuntu",
+            "mcr.microsoft.com/devcontainers/base:debian",
+            "mcr.microsoft.com/devcontainers/base:ubuntu",
+            "debian:9-slim",
+            "debian:10-slim",
+            "debian:11-slim",
+            "ubuntu:focal",
+            "ubuntu:jammy"
           ]
     steps:
       - uses: actions/checkout@v2
