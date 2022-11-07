@@ -1,6 +1,6 @@
 {
     "test_prev_version": {
-      "image": "mcr.microsoft.com/devcontainers/debian:9-slim",
+      "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
       "features": {
         "volta": {
             "version": "1.0.8"
