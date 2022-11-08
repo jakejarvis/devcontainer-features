@@ -17,8 +17,7 @@ Installs Volta, the hassle-free JavaScript tool manager
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
-| version | Select or enter a version. | strsing | latest |
-| otherNodeVersion | Select or enter a version of preinstalled node. | string | undefined |
+| version | Select or enter a version. | string | latest |
 
 
 
