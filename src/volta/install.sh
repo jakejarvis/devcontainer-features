@@ -5,11 +5,14 @@
 #-------------------------------------------------------------------------------------------------------------
 
 USERNAME=${USERNAME:-"automatic"}
-VERSION=${VERSION:-'latest'}
+VOLTA_VERSION=${VERSION:-'latest'}
 
 set -eu
 
+source /etc/os-release
 source utils.sh
+
+cleanup
 
 if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
@@ -38,10 +41,12 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
-if [ "${VERSION}" = "latest" ] || version_greater_equal "${VERSION}" 1.1.0; then
-    curl https://get.volta.sh | bash -s -- --version "${VERSION}"
-else
-    curl https://raw.githubusercontent.com/volta-cli/volta/8f2074f423c65405dfba9858d9bcf393c38ffb45/dev/unix/volta-install.sh | bash -s -- --version "${VERSION}"
+check_packages curl ca-certificates
+
+if [ "${VOLTA_VERSION}" = "latest" ] || version_greater_equal "${VOLTA_VERSION}" 1.1.0; then
+    curl https://get.volta.sh | bash -s -- --version "${VOLTA_VERSION}"
+ else
+    curl https://raw.githubusercontent.com/volta-cli/volta/8f2074f423c65405dfba9858d9bcf393c38ffb45/dev/unix/volta-install.sh | bash -s -- --version "${VOLTA_VERSION}"
 fi
 
 export VOLTA_HOME="/${USERNAME}/.volta"

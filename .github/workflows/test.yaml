@@ -20,13 +20,13 @@ jobs:
         ]
         baseImage:
           [
+            "debian:10",
+            "debian:11",
+            "ubuntu:bionic",
             "ubuntu:focal",
             "ubuntu:jammy",
-            "ubuntu:bionic",
-            "debian:11",
-            "debian:10",
-            "mcr.microsoft.com/devcontainers/base:ubuntu",
             "mcr.microsoft.com/devcontainers/base:debian",
+            "mcr.microsoft.com/devcontainers/base:ubuntu",
           ]
     steps:
       - uses: actions/checkout@v2
