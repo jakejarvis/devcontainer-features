@@ -11,6 +11,18 @@
             ],
             "default": "latest",
             "description": "Select or enter a version."
+        },
+        "installGlobalNode": {
+            "type": "string",
+            "proposals": ["true", "false"],
+            "default": "false",
+            "description": "Install the latest LTS version of Node automatically."
+        },
+        "skipSetup": {
+            "type": "string",
+            "proposals": ["true", "false"],
+            "default": "false",
+            "description": "Should Volta modify path, etc."
         }
     }
 }

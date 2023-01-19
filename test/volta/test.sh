@@ -4,7 +4,6 @@ set -e
 
 source dev-container-features-test-lib
 
-check "Volta version" volta --version
+check "Volta version" bash -c "volta --version"
 
-# Report results
 reportResults
